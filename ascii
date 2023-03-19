@@ -1,0 +1,253 @@
+import os
+
+# Definition der ASCII-Kunst für jedes Buchstabe des Alphabets
+alphabet = {
+    'A': [
+        "    /\\    ",
+        "   /  \\   ",
+        "  / /\\ \\  ",
+        " / ____ \\ ",
+        "/_/    \\_\\"
+    ],
+    'B': [
+        " ____  ",
+        "|  _ \\ ",
+        "| |_) |",
+        "|  _ < ",
+        "| |_) |",
+        "|____/ "
+    ],
+    'C': [
+        "  _____ ",
+        " / ____|",
+        "| |     ",
+        "| |     ",
+        "| |____ ",
+        " \\_____|"
+    ],
+    'D': [
+        " _____  ",
+        "|  __ \\ ",
+        "| |  | |",
+        "| |  | |",
+        "| |__| |",
+        "|_____/ "
+    ],
+    'E': [
+        " ______ ",
+        "|  ____|",
+        "| |__   ",
+        "|  __|  ",
+        "| |____ ",
+        "|______|"
+    ],
+    'F': [
+        " ______ ",
+        "|  ____|",
+        "| |__   ",
+        "|  __|  ",
+        "| |     ",
+        "|_|     "
+    ],
+    'G': [
+        "  _____ ",
+        " / ____|",
+        "| |  __ ",
+        "| | |_ |",
+        "| |__| |",
+        " \\_____|"
+    ],
+    'H': [
+        " _    _ ",
+        "| |  | |",
+        "| |__| |",
+        "|  __  |",
+        "| |  | |",
+        "|_|  |_|"
+    ],
+    'I': [
+        " _____ ",
+        "|_   _|",
+        "  | |  ",
+        "  | |  ",
+        " _| |_ ",
+        "|_____|"
+    ],
+    'J': [
+        "      _ ",
+        "     | |",
+        "     | |",
+        " _   | |",
+        "| |__| |",
+        " \\____/ "
+    ],
+    'K': [
+        " _  __",
+        "| |/ /",
+        "| ' / ",
+        "|  <  ",
+        "| . \\ ",
+        "|_|\\_\\"
+    ],
+    'L': [
+        " _      ",
+        "| |     ",
+        "| |     ",
+        "| |     ",
+        "| |____ ",
+        "|______|"
+    ],
+    'M': [
+        " __  __ ",
+        "|  \\/  |",
+        "| \\  / |",
+        "| |\\/| |",
+        "| |  | |",
+        "|_|  |_|"
+    ],
+    'N': [
+        " _   _ ",
+        "| \\ | |",
+        "|  \\| |",
+        "| . ` |",
+        "| |\\  |",
+        "|_| \\_|"
+    ],
+    'O': [
+        "  ____  ",
+        " / __ \\ ",
+        "| |  | |",
+        "| |  | |",
+        "| |__| |",
+        " \\____/ "
+    ],
+    'P': [
+        " _____ ",
+        "|  __ \\",
+        "| |__) |",
+        "|  ___/",
+        "| |    ",
+        "|_|    "
+    ],
+   'Q': [
+        "  ____  ",
+        " / __ \\ ",
+        "| |  | |",
+        "| |  | |",
+        "| |__| |",
+        " \\___\\_\\"
+    ],
+    'R': [
+        " ____  ",
+        "|  _ \\ ",
+        "| |_) |",
+        "|    <  ",
+        "| . \\ ",
+        "|_|\\_\\"
+    ],
+    'S': [
+        " _____ ",
+        "/ ____|",
+        "| (___ ",
+        " \\___ \\",
+        " ____) |",
+        "|_____/ "
+    ],
+    'T': [
+        " _______ ",
+        "|__   __|",
+        "   | |   ",
+        "   | |   ",
+        "   | |   ",
+        "   |_|   "
+    ],
+    'U': [
+        " _    _ ",
+        "| |  | |",
+        "| |  | |",
+        "| |  | |",
+        "| |__| |",
+        " \\____/ "
+    ],
+    'V': [
+        "__      __",
+        "\\ \\    / /",
+        " \\ \\  / / ",
+        "  \\ \\/ /  ",
+        "   \\  /   ",
+        "    \\/    "
+    ],
+    'W': [
+        "__          __",
+        "\\ \\        / /",
+        " \\ \\  /\\  / / ",
+        "  \\ \\/  \\/ /  ",
+        "   \\  /\\  /   ",
+        "    \\/  \\/    "
+    ],
+    'X': [
+        "__   __",
+        "\\ \\ / /",
+        " \\ V / ",
+        "  > <  ",
+        " / . \\ ",
+        "/_/ \\_\\"
+    ],
+    'Y': [
+        "__     __",
+        "\\ \\   / /",
+        " \\ \\_/ / ",
+        "  \\   /  ",
+        "   | |   ",
+        "   |_|   "
+    ],
+    'Z': [
+        " ______",
+        "|___  /",
+        "   / / ",
+        "  / /  ",
+        " / /__ ",
+        "/_____|"
+    ],
+    'MIGZ': [
+           "_oo0oo_",
+          "o8888888o",
+         '"88" . "88"',
+          "(| -_- |)",
+          "0\  =  /0",
+        "___/'---'\___",
+      ".' \\|     |// '.",
+     "/ \\|||  :  |||// \\",
+    "/ _||||| -:- |||||_ \\",
+   "|   | \\\  -  /// |   |",
+   "| \_|  ''\---/''  |_/ |",
+   "\  .-\__  '-'  __/-.  /",
+ "___'. .'  /--.--\  '. .'___",
+"."" '<  '.___\_<|>_/___.' >'  "".",
+"| | :  `- \`.:`\ _ /`:.`/ -`  : | |",
+"\  \ `-.   \_ __\ /__ _/   .-` /  /",
+"=====`-.____`.___ \_____/ ___.`____.-`=====",
+                  '`=---=`""")'
+    ]
+}
+# Schleife, die die ASCII-Kunst für jeden Buchstaben im Alphabet ausgibt
+while True:
+    os.system('cls' if os.name == 'nt' else 'clear')  # Löscht den Konsolenbildschirm (je nach Betriebssystem)
+    print("Drücken Sie eine Taste, um den entsprechenden Buchstaben im ASCII-Format zu sehen.")
+    print("Drücken Sie 'q' zum Beenden.")
+    print("")
+
+    for letter in alphabet:  # Schleife über jeden Buchstaben im Alphabet
+        print(f"{letter}:")
+        for line in alphabet[letter]:  # Schleife über jede Zeile des ASCII-Art des Buchstabens
+            print(line)  # Ausgabe der ASCII-Kunst des aktuellen Buchstabens
+        print("")
+
+    key_press = input("Ihre Eingabe: ")  # Einlesen der Benutzereingabe
+    if key_press == "q":  # Prüfen, ob die Benutzereingabe 'q' ist (zum Beenden)
+        break
+    elif key_press.upper() in alphabet:  # Prüfen, ob der Buchstabe in der alphabetischen Liste enthalten ist
+        os.system('cls' if os.name == 'nt' else 'clear')  # Löscht den Konsolenbildschirm (je nach Betriebssystem)
+        for line in alphabet[key_press.upper()]:  # Schleife über jede Zeile des ASCII-Art des Buchstabens
+            print(line)  # Ausgabe der ASCII-Kunst des Buchstabens
+        input("Drücken Sie eine Taste, um fortzufahren...")  # Warten auf eine Benutzereingabe, bevor fortgesetzt wird
